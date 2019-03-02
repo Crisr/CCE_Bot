@@ -25,7 +25,7 @@ def get_googleSheetRecords():
             current_sheet = wks.worksheet(item.title)
             print("Downloading: ", current_sheet.title)
             # Extract all records
-            dataframe_collection[current_sheet.title] = current_sheet.get_as_df(current_sheet)            
+            dataframe_collection[current_sheet.title] = current_sheet.get_as_df()            
             print("\n")
         return dataframe_collection
     
