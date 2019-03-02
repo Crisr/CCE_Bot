@@ -14,18 +14,18 @@ def get_googleSheetRecords():
            dataframe_collection[title] = xls.parse(title)
         return dataframe_collection
     else:
-        # scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-        # credentials = ServiceAccountCredentials.from_json_keyfile_name('SolitaireBoardGames-c207d72eba1a.json', scope)
         gc = pygsheets.authorize(service_file='SolitaireBoardGames-c207d72eba1a.json')
         wks = gc.open('CombatCommanderEurope')
         
         worksheet_list = wks.worksheets()        
-        dataframe_collection = {} 
+        dataframe_collection = {}
         for item in worksheet_list:
             current_sheet = wks.worksheet('title',item.title)
+            cells = current_sheet.get_all_values(include_tailing_empty_rows=False, include_tailing_empty=False)
+            lastrow = len(cells)
+            lastcol = len(cells[0])
             print("Downloading: ", current_sheet.title)
-            # Extract all records
-            dataframe_collection[current_sheet.title] = current_sheet.get_as_df()            
+            dataframe_collection[current_sheet.title] = current_sheet.get_as_df(start=(1,1),end=(lastrow,lastcol))            
         return dataframe_collection
     
 
