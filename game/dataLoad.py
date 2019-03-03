@@ -7,7 +7,7 @@ import os.path
 def get_googleSheetRecords():
     # loads local xls or else google sheets xls
     if os.path.isfile('CombatCommanderEurope.xlsx'):
-        print ('xlsx exists!')
+        # print ('xlsx exists!')
         xls = pd.ExcelFile('CombatCommanderEurope.xlsx')     
         dataframe_collection = {} 
         for title in xls.sheet_names:
