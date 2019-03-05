@@ -16,11 +16,19 @@ def main():
     data = dataLoad.get_googleSheetRecords()
     ScenarioList = data['Scenarios']['Scenario'].tolist()
     completer = WordCompleter(ScenarioList)
-    def bottom_toolbar():
+    def bottom_toolbar_Scenario():
         return HTML('Example: <b><style bg="ansired">Scenario...</style></b>')
-    text = prompt('Select Scenario> ', bottom_toolbar=bottom_toolbar, completer=completer)
-    print('Selected:',text)
-    CCE_Game = game_loop.Game(data, text)
+    SelectedScenario = prompt('Select Scenario> ', bottom_toolbar=bottom_toolbar_Scenario, completer=completer)
+    
+    Scenario_row = data['Scenarios'].loc[data['Scenarios']['Scenario'] == SelectedScenario]
+    factions = Scenario_row[['GER', 'RUS', 'US']].dropna(axis='columns').keys() #drop NaN values
+
+    completer = WordCompleter(factions.tolist())
+    def bottom_toolbar_Side():
+        return HTML('Example: <b><style bg="ansired">...</style></b>')
+    bot_side = prompt('Select Bot Faction '+factions.tolist()[0]+'/'+factions.tolist()[1]+'> ', bottom_toolbar=bottom_toolbar_Side, completer=completer)
+   
+    CCE_Game = game_loop.Game(data, Scenario_row, bot_side)
     CCE_Game.run()
 
 if __name__ == '__main__':

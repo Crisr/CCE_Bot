@@ -1,6 +1,6 @@
 
 class Game:
-    def __init__(self, data, scenario):
+    def __init__(self, data, scenario, bot_side):
         self.xls_data = data
         self.scenario = scenario
         self.GAME_END = False
