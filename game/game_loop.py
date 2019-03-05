@@ -2,7 +2,8 @@
 class Game:
     def __init__(self, data, scenario, bot_side):
         self.xls_data = data
-        self.scenario = scenario
+        self.scenario = scenario #panda Series!
+        self.bot_side = bot_side
         self.GAME_END = False
 
     def run(self):
