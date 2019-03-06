@@ -24,6 +24,12 @@ class CCE_Map:
         self.xls_data = data
         self.scenario = scenario #panda Series!
         self.bot_side = bot_side
+        print(scenario['Maps'][0])
+        self.map = [[{'id':str(a)+str(b)} for a in range(5)] for b in range(6)]
+    
+    def DrawMap(self):
+        pass
+
     
 
 #test

@@ -1,4 +1,4 @@
-class History(object):
+class GameCommand(object):
     def __init__(self):
         self._commands = list()
 
@@ -10,7 +10,7 @@ class History(object):
         self._commands.pop().undo()
 
 class MoveUnit(object):
-    def __init__(self, data):
+    def __init__(self, data, Map):
         # data: list{'Map':PandasDataframe, 'MoveCommand':String } 
         # // MoveCommand format: "A1(GFP:12)-B2", "A1-B2"
         self.data = data
