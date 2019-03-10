@@ -1,5 +1,6 @@
 from collections import namedtuple
 import string,re
+import numpy as np
 # map hexes in odd_q configuration https://www.redblobgames.com/grids/hexagons/#coordinates
 
 OffsetCoord = namedtuple("OffsetCoord", "col, row")
@@ -24,13 +25,20 @@ class CCE_Map:
         self.xls_data = data
         self.scenario = scenario #panda Series!
         self.bot_side = bot_side
-        print(scenario['Maps'][0])
-        self.map = [[{'id':str(a)+str(b)} for a in range(5)] for b in range(6)]
+        test = data['Maps'].loc[data['Maps']['name']==scenario['Maps'][0]]
+        # print(test) #selects row in Maps sheet where Id = map name
+        self.map = {
+                    'name':scenario['Maps'][0],
+                    'col':test.loc[0,'col'],
+                    'row':test.loc[0,'row']}
+        dt = np.dtype([('cellName', np.unicode_, 4)])        
+        self.map['cells']=np.fromiter((str(a)+str(b) for a in range(self.map['col']) for b in range(self.map['row'])),dtype="S4")
+        pass
     
     def DrawMap(self):
         pass
 
-    
+
 
 #test
 print("A1: ",literal_to_coord('A1'))
