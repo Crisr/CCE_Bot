@@ -12,8 +12,12 @@ class Game:
         self.CCE_Cmd = Cmd.GameCommand()
 
     def run(self):
-        
-        print('(3,3) E1>',self.Scenario_Map.get_neighboor(hm.OffsetCoord(3,3),'E1'))
+        # --Tests
+        print('B2@E3>',hm.coords_to_literal(self.Scenario_Map.get_neighboor(hm.literal_to_coord('B2'),'E3')))
+        print('C3@E2>',hm.coords_to_literal(self.Scenario_Map.get_neighboor(hm.literal_to_coord('C3'),'E2')))
+        # Should return False:
+        print('A1@E5>',hm.coords_to_literal(self.Scenario_Map.get_neighboor(hm.literal_to_coord('A1'),'E5')))
+        # Tests--
         while not self.GAME_END:
             print('Loop')
             self.GAME_END = True

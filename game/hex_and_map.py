@@ -13,6 +13,8 @@ def literal_to_coord(s):
     return OffsetCoord(col, row)
 
 def coords_to_literal(OffsetCoord):
+    if OffsetCoord == False: 
+        return 'Coords out of bounds'
     ASCII_List = string.ascii_uppercase
     col = ASCII_List[OffsetCoord.col]
     row = str(OffsetCoord.row+1)
@@ -47,6 +49,11 @@ class CCE_Map:
         parity = OffCoord.col & 1
         ind = self.hex_edges.index(direction)
         dir = self.oddq_directions[parity][ind]
+        #check boundries, return False if out of bounds
+        if ((OffCoord.col + dir[0]) > self.map['col']) or ((OffCoord.col + dir[0]) < 0): 
+            return False
+        if ((OffCoord.row + dir[1]) > self.map['row']) or ((OffCoord.row + dir[1]) < 0): 
+            return False
         return OffsetCoord(OffCoord.col + dir[0], OffCoord.row + dir[1])
     
     def DrawMap(self):
@@ -55,7 +62,7 @@ class CCE_Map:
 
 
 #test
-print("A1: ",literal_to_coord('A1'))
-print('B2: ',literal_to_coord('B2'))
-print('N10: ',literal_to_coord('N10'))
-print(coords_to_literal(OffsetCoord(2, 2)))
+# print("A1: ",literal_to_coord('A1'))
+# print('B2: ',literal_to_coord('B2'))
+# print('N10: ',literal_to_coord('N10'))
+# print(coords_to_literal(OffsetCoord(2, 2)))
