@@ -12,6 +12,8 @@ class Game:
         self.CCE_Cmd = Cmd.GameCommand()
 
     def run(self):
+        
+        print('(3,3) E1>',self.Scenario_Map.get_neighboor(hm.OffsetCoord(3,3),'E1'))
         while not self.GAME_END:
             print('Loop')
             self.GAME_END = True

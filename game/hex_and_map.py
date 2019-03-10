@@ -30,10 +30,24 @@ class CCE_Map:
         self.map = {
                     'name':scenario['Maps'][0],
                     'col':test.loc[0,'col'],
-                    'row':test.loc[0,'row']}
-        dt = np.dtype([('cellName', np.unicode_, 4)])        
-        self.map['cells']=np.fromiter((str(a)+str(b) for a in range(self.map['col']) for b in range(self.map['row'])),dtype="S4")
+                    'row':test.loc[0,'row']}   
+        self.map['cells_coords']=[[OffsetCoord(x,y) for x in range(self.map['col'])] for y in range(self.map['row'])]
+        self.map['cells_names']=[[coords_to_literal(OffsetCoord(x,y)) for x in range(self.map['col'])] for y in range(self.map['row'])]
+        self.hex_edges=['E3','E2','E1','E6','E5','E4'] # Edge 1 on top and then clockwise
+        self.oddq_directions = [
+        [(1,  0), (1, -1),  (0, -1), 
+         (-1, -1), (-1,  0), (0, 1)],
+        
+        [(1, 1), (1,  0), (0, -1), 
+        (-1,  0), (-1, 1), (0, 1)]
+        ]
         pass
+
+    def get_neighboor(self, OffCoord, direction): # direction = hex_edges value!
+        parity = OffCoord.col & 1
+        ind = self.hex_edges.index(direction)
+        dir = self.oddq_directions[parity][ind]
+        return OffsetCoord(OffCoord.col + dir[0], OffCoord.row + dir[1])
     
     def DrawMap(self):
         pass
