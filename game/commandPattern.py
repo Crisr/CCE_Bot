@@ -4,7 +4,7 @@ class GameCommand(object):
 
     def execute(self, command):
         self._commands.append(command)
-        command.execute()
+        command()
 
     def undo(self):
         self._commands.pop().undo()

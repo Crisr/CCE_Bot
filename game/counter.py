@@ -37,4 +37,5 @@ class CounterGroup:
     def __init__(self, counter_names_str_list):
         self.groupNames = counter_names_str_list
 
-    
+    def randomSetUp(self, validHexes_list): # 2D list of A1, A2.. B1, B2 hex names
+        pass

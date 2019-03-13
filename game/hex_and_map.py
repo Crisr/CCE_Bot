@@ -33,8 +33,11 @@ class CCE_Map:
                     'name':scenario['Maps'][0],
                     'col':test.loc[0,'col'],
                     'row':test.loc[0,'row']}   
+        
         self.map['cells_coords']=[[OffsetCoord(x,y) for x in range(self.map['col'])] for y in range(self.map['row'])]
         self.map['cells_names']=[[coords_to_literal(OffsetCoord(x,y)) for x in range(self.map['col'])] for y in range(self.map['row'])]
+        self.map['np_hexMap']=np.array(self.map['cells_names']) #numpy 2D map of cell names (A1, A2, ...)
+        
         self.hex_edges=['E3','E2','E1','E6','E5','E4'] # Edge 1 on top and then clockwise
         self.oddq_directions = [
         [(1,  0), (1, -1),  (0, -1), 
@@ -43,6 +46,8 @@ class CCE_Map:
         [(1, 1), (1,  0), (0, -1), 
         (-1,  0), (-1, 1), (0, 1)]
         ]
+
+        self._commands = list()
         pass
 
     def get_neighboor(self, OffCoord, direction): # direction = hex_edges value!
@@ -57,7 +62,14 @@ class CCE_Map:
         return OffsetCoord(OffCoord.col + dir[0], OffCoord.row + dir[1])
     
     def DrawMap(self):
+        print('DrawMap')
         pass
+   
+    def execute(self, command):
+        self._commands.append(command)
+        if command == 'DrawMap':
+            self.DrawMap()
+
 
 
 
