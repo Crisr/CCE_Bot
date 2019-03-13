@@ -34,5 +34,7 @@ class Counter:
         return True
 
 class CounterGroup:
-    def __init__(self, counter_names_str):
-        self.groupNames = counter_names_str
+    def __init__(self, counter_names_str_list):
+        self.groupNames = counter_names_str_list
+
+    
