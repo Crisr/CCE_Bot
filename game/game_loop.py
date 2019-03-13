@@ -1,6 +1,8 @@
 import game.commandPattern as Cmd
 import game.hex_and_map as hm
+from prompt_toolkit import print_formatted_text
 
+map_info = print_formatted_text
 
 class Game:
     def __init__(self, data, scenario, bot_side):
