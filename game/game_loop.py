@@ -22,7 +22,7 @@ class Game:
         # Tests--
         while not self.GAME_END:
             print('Loop')
-            self.CCE_Cmd.execute(self.Scenario_Map.DrawMap)
+    
             self.GAME_END = True
         #     process_events() # process input and other stuff
         #     update() # update all objects that need to be updated, e.g. position changes, physics, all that other stuff

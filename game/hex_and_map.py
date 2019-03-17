@@ -64,13 +64,6 @@ class CCE_Map:
     def DrawMap(self):
         print('DrawMap')
         pass
-   
-    def execute(self, command):
-        self._commands.append(command)
-        if command == 'DrawMap':
-            self.DrawMap()
-
-
 
 
 #test
